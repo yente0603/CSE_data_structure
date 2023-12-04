@@ -14,6 +14,5 @@ int main(int argc, char *argv[]){
                   << "compress - e.g. ./main.elf -c src/test.txt -o output/encoded_output.compress\n"
                   << "decompress - e.g. ./main.elf -u output/encoded_output.compress -o output/decoded_output.txt\n";
     }
-    //funcCall();
     return 0;
 }

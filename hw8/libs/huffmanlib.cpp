@@ -117,13 +117,13 @@ long getFileSize(string filename) {
 	return size;
 }
 
-void compressFile(string inputfile, string outputfile) {
+int compressFile(string inputfile, string outputfile) {
     ifstream infile(inputfile, ios::binary);  
     ofstream outfile(outputfile, ios::binary | ios::out); 
     zeroPadding = 0;
     if (!infile.is_open() || !outfile.is_open()) {
         cout << "Could not open file for encoding." << endl;  
-        return;
+        return 0;
     }  
 
     /* convert from char to unsigned char to access vector elements*/
@@ -151,6 +151,8 @@ void compressFile(string inputfile, string outputfile) {
 
     ofstream file("output/frequency_table.txt", ios::binary | ios::app);
     file << zeroPadding;
+
+    return 0;
 }
 
 void Ratio(string filename, long originalSize) {
@@ -186,13 +188,13 @@ void readFrequencyTable(string inputFile){
     file.close();    
 }
 
-void decompressFile(string inputfile, string outputfile) {
+int decompressFile(string inputfile, string outputfile) {
     readFrequencyTable("output/frequency_table.txt");
     ifstream infile(inputfile, ios::binary);  
     ofstream outfile(outputfile, ios::out);  
     if (!infile.is_open() || !outfile.is_open()){
         cout << "Could not open file for decoding." << endl;  
-        return;  
+        return 0;  
     } 
 
     /*find zeroPadding*/
@@ -218,7 +220,7 @@ void decompressFile(string inputfile, string outputfile) {
         zeroPadding = zeroPaddingChar - '0'; // 從字符轉換為整數  
     } else {  
         cout << "Could not read the zero padding information." << endl;  
-        return;  
+        return 0;  
     }
 
 
@@ -244,6 +246,7 @@ void decompressFile(string inputfile, string outputfile) {
     }
     infile.close();
     outfile.close();
+    return 0;
 }
 
 // bool areContentsSame(string file1, string file2) {  
