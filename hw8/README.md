@@ -1,17 +1,17 @@
-Usage:./main.elf $(option) $(inputfile) -o $(outputfile)\n
+Usage: ./main.elf $(option) $(inputfile) -o $(outputfile)
 
 
 option:
--c compress file
--u decompress file
+-c compress file  
+-u decompress file  
 
 
 e.g.
 compress
 ```cpp
-e.g. ./main.elf -c src/test2.jpg -o output/encoded_output.compress
+./main.elf -c src/test2.jpg -o output/encoded_output.compress
 ```  
 decompress
 ```cpp
-e.g. ./main.elf -u output/encoded_output.compress -o output/decoded_output.jpg
-``
+./main.elf -u output/encoded_output.compress -o output/decoded_output.jpg
+```
