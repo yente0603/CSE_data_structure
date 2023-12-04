@@ -1,12 +1,12 @@
-Usage: ./main.elf $(option) $(inputfile) -o $(outputfile)
+Usage: ./main.elf \$(option) \$(inputfile) -o \$(outputfile)
 
 
-option:
+option:  
 -c compress file  
 -u decompress file  
 
 
-e.g.
+e.g.  
 compress
 ```cpp
 ./main.elf -c src/test2.jpg -o output/encoded_output.compress
