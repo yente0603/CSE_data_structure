@@ -214,10 +214,10 @@ int decompressFile(string inputfile, string outputfile) {
     char zeroPaddingChar;  
     ifstream paddingFile("output/frequency_table.txt", ios::binary);  
     if (paddingFile.is_open()) {  
-        paddingFile.seekg(-1, ios::end); // 移動到文件末尾的前一個字符  
-        paddingFile.get(zeroPaddingChar); // 讀取最後一個字符  
+        paddingFile.seekg(-1, ios::end); // move to the text -1 of the end of file  
+        paddingFile.get(zeroPaddingChar); // get and store into zeroPaddingChar  
         paddingFile.close();  
-        zeroPadding = zeroPaddingChar - '0'; // 從字符轉換為整數  
+        zeroPadding = zeroPaddingChar - '0'; // char to int  
     } else {  
         cout << "Could not read the zero padding information." << endl;  
         return 0;  
