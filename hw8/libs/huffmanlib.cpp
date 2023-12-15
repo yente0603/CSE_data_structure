@@ -13,26 +13,6 @@ map<char, string> frequencyTable; // frequcncy table
 map<string, char> reverseFrequencyTable; // reverse frequency table
 int zeroPadding = 0; // record more 0 for bytes
 
-struct huffmanNode{
-    unsigned char data;
-    unsigned frequency;
-    huffmanNode *left, *right;
-    
-    huffmanNode(unsigned char data, unsigned frequency, huffmanNode *left = nullptr, huffmanNode *right = nullptr) 
-     : data(data), frequency(frequency), left(left), right(right) {}
-};
-
-/* Structure to compare the frequency of the Huffman tree nodes*/
-struct compare {
-    bool operator()(huffmanNode *left, huffmanNode *right) {
-        // rule 2: considering set and frequency
-        if (left->frequency != right->frequency)
-            return left->frequency > right->frequency;
-        else
-            return (left->data > right->data);
-    }
-};
-
 huffmanNode *huffmanTree(vector<unsigned char> &data, vector<unsigned> &frequency){
     priority_queue<huffmanNode*, vector<huffmanNode*>, compare> pq;
     for(int i = 0; i < data.size(); i++) // push into priority queue and make min heap
@@ -199,18 +179,6 @@ int decompressFile(string inputfile, string outputfile) {
 
     /*find zeroPadding*/
 
-    // map<string, char> ::iterator it = reverseFrequencyTable.begin();
-    // map<string, char> ::iterator itend = reverseFrequencyTable.end();
-    // string findZeroPadding;
-    // while(it!=itend){
-    //     findZeroPadding = it->second;
-    //     break;
-    // }
-    // // findZeroPadding = atoi(findZeroPadding.c_str());
-    // // cout << findZeroPadding << endl;
-    // zeroPadding = atoi(findZeroPadding.c_str());
-    // // cout << zeroPadding << endl;
-
     char zeroPaddingChar;  
     ifstream paddingFile("output/frequency_table.txt", ios::binary);  
     if (paddingFile.is_open()) {  
@@ -249,27 +217,6 @@ int decompressFile(string inputfile, string outputfile) {
     return 0;
 }
 
-// bool areContentsSame(string file1, string file2) {  
-//     ifstream fin1(file1, ios::binary);  
-//     ifstream fin2(file2, ios::binary);  
-//     if (!fin1.is_open() || !fin2.is_open())   
-//         return false;  
-  
-//     // compare every single char  
-//     char ch1, ch2;  
-//     while (true) {  
-//         fin1.get(ch1);  
-//         fin2.get(ch2);  
-//         if (fin1.eof() && fin2.eof()) // Both files ended together  
-//             return true;  
-//         else if (fin1.eof() || fin2.eof()) // One of the files ended before the other  
-//             return false;  
-//         else if (ch1 != ch2) // Mismatch found  
-//             return false;  
-//     }  
-//     // Should never reach here  
-//     return true;  
-// }
 void compress(string inputFilePath, string outputFileName){
     vector<unsigned char> data;
     vector<unsigned> frequency;
@@ -303,11 +250,5 @@ void decompress(string inputFilePath, string outputFileName){
     /*step 6: decompress the compress to original file*/
     decompressFile(inputFilePath, outputFileName);
     cout << "decompress done!" << endl;
-
-    /*checking the decompress file is the same as input file*/
-    // if(areContentsSame(inputFilePath, outputFileName))
-    //     cout << "Contents of inputFile and outputFile are the same." << endl;
-    // else
-    //     cout << "Contents of inputFile and outputFile are NOT the same." << endl;
 }
 
