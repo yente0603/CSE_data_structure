@@ -13,6 +13,26 @@ map<char, string> frequencyTable; // frequcncy table
 map<string, char> reverseFrequencyTable; // reverse frequency table
 int zeroPadding = 0; // record more 0 for bytes
 
+struct huffmanNode{
+    unsigned char data;
+    unsigned frequency;
+    huffmanNode *left, *right;
+    
+    huffmanNode(unsigned char data, unsigned frequency, huffmanNode *left = nullptr, huffmanNode *right = nullptr) 
+     : data(data), frequency(frequency), left(left), right(right) {}
+};
+
+/* Structure to compare the frequency of the Huffman tree nodes*/
+struct compare {
+    bool operator()(huffmanNode *left, huffmanNode *right) {
+        // rule 2: considering set and frequency
+        if (left->frequency != right->frequency)
+            return left->frequency > right->frequency;
+        else
+            return (left->data > right->data);
+    }
+};
+
 huffmanNode *huffmanTree(vector<unsigned char> &data, vector<unsigned> &frequency){
     priority_queue<huffmanNode*, vector<huffmanNode*>, compare> pq;
     for(int i = 0; i < data.size(); i++) // push into priority queue and make min heap
