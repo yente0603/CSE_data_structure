@@ -1,3 +1,7 @@
+// Author: 李彥德 Lee Yen Te B096060041
+// Date: 2023.12.11
+// Purpose: complement Huffman algorithm to compress and decompress file 
+// compiler standard: g++11
 #include "libs/huffmanlib.cpp"
 int main(int argc, char *argv[]){
     if (argc == 5 && string(argv[1]) == "-c")
