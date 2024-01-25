@@ -1,0 +1,6 @@
+*.exe
+*.elf
+test.cpp
+*.out
+*.o
+*.zip
