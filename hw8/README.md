@@ -1,40 +1,43 @@
-## Option
+# Implementation of a compression software with Huffman algorithm
 
--c compress file  
--u decompress file  
-
-## Usage of original Makefile
-
-create an executable(.elf) file on linux based system
+## Use the original Makefile written by author
 
 ```zsh
-mkdir obj
+mkdir obj output
 make
 ```
 
 compress & decompress
 
-```c++
-./main.elf -c src/test.txt -o output/encoded_output.compress
-./main.elf -u output/encoded_output.compress -o output/decoded_output.txt
+```zsh
+Usage:./main.elf $(option) $(inputfile) -o $(outputfile)
+
+option:
+"-c" compress file
+"-u" decompress file
+
+e.g.
+compress - e.g. ./main.elf -c src/test.txt -o output/encoded_output.compress
+decompress - e.g. ./main.elf -u output/encoded_output.compress -o output/decoded_output.txt
 ```  
 
-## Usage of Cmake
+## Use the Cmake for cross-platform
 
 ```zsh
-mkdir build && cd build
+cmake --version # checking if you have installed cmake
+mkdir obj output build && cd build
 cmake .. #since CmakeLists.txt is in the upper folder 
 make
 ```
 
 compress & decompress
 
-```c++
+```cpp
 ./main.elf -c ../src/test.txt -o ../output/encoded_output.compress
 ./main.elf -u ../output/encoded_output.compress -o ../output/decoded_output.txt
 ```  
 
-note: If you want to use Cmake, you have to change all the directory in the huffmanlib.cpp.  
+note: If you want to use the Cmake, you have to change all the directory in the huffmanlib.cpp.  
 > huffmanlib.cpp:152: "output/frequency_table.txt" > "../output/frequency_table.txt"  
 > huffmanlib.cpp:163: "output/encoded_output.compress" > "../output/encoded_output.compress"  
 > huffmanlib.cpp:192: "output/frequency_table.txt" > "../output/frequency_table.txt"  
