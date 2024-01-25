@@ -24,17 +24,16 @@ decompress - e.g. ./main.elf -u output/encoded_output.compress -o output/decoded
 
 ## Use the Cmake for cross-platform
 
-```zsh
-cmake --version # checking if you have installed cmake
+```bash
+cmake --version
 mkdir obj output build && cd build
-cmake .. #since CmakeLists.txt is in the upper folder 
+cmake ..
 make
-make clean-custom # To enable using the `make clean-custom` command to clean up custom files,
-```
-
-compress & decompress
-
-```cpp
 ./main.elf -c ../src/test.txt -o ../output/encoded_output.compress
 ./main.elf -u ../output/encoded_output.compress -o ../output/decoded_output.txt
-```  
+make clean-custom
+```
+
+> Checking if you have installed cmake.
+> Since CmakeLists.txt is in the upper folder, we use `make ..` to initilize cmake.
+> To enable using the `make clean-custom` command to clean up custom files such as .elf or .compress.
