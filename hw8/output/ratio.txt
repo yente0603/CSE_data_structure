@@ -1,3 +1,0 @@
-Original Size: 9 bytes
-Compressed Size: 3 bytes
-Compression Ratio: 0.333333
