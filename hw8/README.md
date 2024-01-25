@@ -1,15 +1,16 @@
 # Implementation of a compression software with Huffman algorithm
 
-## Use the original Makefile written by author
+## Use the Makefile written by author
 
-```zsh
+```bash
 mkdir obj output
 make
+make clean
 ```
 
 compress & decompress
 
-```zsh
+```bash
 Usage:./main.elf $(option) $(inputfile) -o $(outputfile)
 
 option:
@@ -28,6 +29,7 @@ cmake --version # checking if you have installed cmake
 mkdir obj output build && cd build
 cmake .. #since CmakeLists.txt is in the upper folder 
 make
+make clean-custom # To enable using the `make clean-custom` command to clean up custom files,
 ```
 
 compress & decompress
@@ -36,11 +38,3 @@ compress & decompress
 ./main.elf -c ../src/test.txt -o ../output/encoded_output.compress
 ./main.elf -u ../output/encoded_output.compress -o ../output/decoded_output.txt
 ```  
-
-note: If you want to use the Cmake, you have to change all the directory in the huffmanlib.cpp.  
-> huffmanlib.cpp:152: "output/frequency_table.txt" > "../output/frequency_table.txt"  
-> huffmanlib.cpp:163: "output/encoded_output.compress" > "../output/encoded_output.compress"  
-> huffmanlib.cpp:192: "output/frequency_table.txt" > "../output/frequency_table.txt"  
-> huffmanlib.cpp:203: "output/frequency_table.txt" > "../output/frequency_table.txt"  
-> huffmanlib.cpp:245: "output/frequency_table.txt" > "../output/frequency_table.txt"  
-> huffmanlib.cpp:246: "output/ratio.txt" > "../output/ratio.txt"  
