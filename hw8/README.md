@@ -1,3 +1,5 @@
+#
+
 ## Option
 
 -c compress file  
@@ -8,6 +10,7 @@
 create an executable(.elf) file on linux based system
 
 ```zsh
+mkdir obj
 make
 ```
 
