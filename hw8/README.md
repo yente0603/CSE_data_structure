@@ -34,6 +34,6 @@ make
 make clean-custom
 ```
 
-> Checking if you have installed cmake.
-> Since CmakeLists.txt is in the upper folder, we use `make ..` to initilize cmake.
-> To enable using the `make clean-custom` command to clean up custom files such as .elf or .compress.
+> Checking if you have installed cmake.  
+> Since CmakeLists.txt is in the upper folder, we use `make ..` to initilize cmake.  
+> To enable using the `make clean-custom` command to clean up custom files such as .elf or .compress.  
