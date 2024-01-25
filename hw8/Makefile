@@ -8,4 +8,4 @@ all:
 
 clean:
 	rm -rf *.elf *.o obj/*.o
-	rm output/*.compress output/*.txt output/*.jpg 
+	rm output/*.compress output/*.txt
