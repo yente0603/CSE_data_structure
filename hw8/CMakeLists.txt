@@ -16,5 +16,7 @@ if(NOT TARGET clean)
         COMMAND ${CMAKE_COMMAND} -E rm -f "${CMAKE_BINARY_DIR}/*.elf"
         COMMAND ${CMAKE_COMMAND} -E rm -f "../output/*.compress"
         COMMAND ${CMAKE_COMMAND} -E rm -f "../output/*.txt"
+        COMMAND ${CMAKE_COMMAND} -E rm -f "../output/*.jpg"
+        COMMAND ${CMAKE_COMMAND} -E rm -f "../output/*.mp3"
     )
 endif()
