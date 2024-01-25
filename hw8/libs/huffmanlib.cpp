@@ -131,7 +131,7 @@ long getFileSize(string filename)
     return size;
 }
 
-int compressFile(string inputfile, string outputfile)
+int compressFile(string inputfile, string outputfile, string frequency_table)
 {
     ifstream infile(inputfile, ios::binary);
     ofstream outfile(outputfile, ios::binary | ios::out);
@@ -167,20 +167,20 @@ int compressFile(string inputfile, string outputfile)
     infile.close();
     outfile.close();
 
-    ofstream file("output/frequency_table.txt", ios::binary | ios::app);
+    ofstream file(frequency_table, ios::binary | ios::app);
     file << zeroPadding;
 
     return 0;
 }
 
-void Ratio(string filename, long originalSize)
+void Ratio(string filename, string compress_output, long originalSize)
 {
     ofstream file(filename, ios::binary | ios::out);
     if (!file.is_open())
         cout << "could not write file header of encoding table." << endl;
     else
     {
-        long compressedSize = getFileSize("output/encoded_output.compress");
+        long compressedSize = getFileSize(compress_output);
 
         double compressionRatio = compressedSize / (double)originalSize;
 
@@ -211,9 +211,10 @@ void readFrequencyTable(string inputFile)
     file.close();
 }
 
-int decompressFile(string inputfile, string outputfile)
+int decompressFile(string inputfile, string outputfile, string frequency_table)
 {
-    readFrequencyTable("output/frequency_table.txt");
+    readFrequencyTable(frequency_table);
+
     ifstream infile(inputfile, ios::binary);
     ofstream outfile(outputfile, ios::out);
     if (!infile.is_open() || !outfile.is_open())
@@ -225,7 +226,7 @@ int decompressFile(string inputfile, string outputfile)
     /*find zeroPadding*/
 
     char zeroPaddingChar;
-    ifstream paddingFile("output/frequency_table.txt", ios::binary);
+    ifstream paddingFile(frequency_table, ios::binary);
     if (paddingFile.is_open())
     {
         paddingFile.seekg(-1, ios::end);  // move to the text -1 of the end of file
@@ -277,6 +278,13 @@ void compress(string inputFilePath, string outputFileName)
     string ratio = "output/ratio.txt";
     string compress_output = outputFileName;
 
+    /*Using Cmake*/
+    if (inputFile[0] == '.' && inputFile[1] == '.' && inputFile[2] == '/' && compress_output[0] == '.' && compress_output[1] == '.' && compress_output[2] == '/')
+    {
+        frequency_table = "../output/frequency_table.txt";
+        ratio = "../output/ratio.txt";
+    }
+
     /*step 1: calculate the frequency*/
     calculateFrequency(inputFile, data, frequency);
     huffmanNode *node = huffmanTree(data, frequency);
@@ -288,10 +296,10 @@ void compress(string inputFilePath, string outputFileName)
     writeFrequencytable(frequency_table);
 
     /* Step 4: Encode the original file and write to new file */
-    compressFile(inputFile, compress_output);
+    compressFile(inputFile, compress_output, frequency_table);
 
     /*step 5: calculation the compression ratio*/
-    Ratio(ratio, getFileSize(inputFile));
+    Ratio(ratio, compress_output, getFileSize(inputFile));
 
     deleteTree(node); // to free memory
     cout << "compress done!" << endl;
@@ -299,7 +307,12 @@ void compress(string inputFilePath, string outputFileName)
 
 void decompress(string inputFilePath, string outputFileName)
 {
+    /*Using Cmake*/
+    string frequency_table = "output/frequency_table.txt";
+    if (inputFilePath[0] == '.' && inputFilePath[1] == '.' && inputFilePath[2] == '/' && outputFileName[0] == '.' && outputFileName[1] == '.' && outputFileName[2] == '/')
+        frequency_table = "../output/frequency_table.txt";
+
     /*step 6: decompress the compress to original file*/
-    decompressFile(inputFilePath, outputFileName);
+    decompressFile(inputFilePath, outputFileName, frequency_table);
     cout << "decompress done!" << endl;
 }
