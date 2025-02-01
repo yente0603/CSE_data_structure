@@ -94,6 +94,7 @@ int main()
         getline(cin, str);
         setB.create(str);
         c = cin.get();
+        cout << setA << endl;
         cout << "Test Case " << count++ << ":\n";
         cout << "A: {" << setA << "}\n";
         cout << "B: {" << setB << "}\n";
