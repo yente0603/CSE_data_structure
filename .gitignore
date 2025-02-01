@@ -4,3 +4,4 @@ test.cpp
 *.out
 *.o
 *.zip
+algo/build/*
